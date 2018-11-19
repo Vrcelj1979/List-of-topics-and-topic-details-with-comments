@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}comment{% endblock title %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1>Ninja Tech Forum</h1>
+    <p>Welcome to Ninja Tech Forum - the best forum for teach fans. Comin soon!</p>
+</div>
+<div>
+    <h1>List of topics details</h1>
+
+    {% for topic in Topic %}
+    <div class="col-xs-12 col-md-10">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <span class="pull-left">User email: {{ topic.author_email }}, Time created: {{ topic.created }}</span>
+                <span class="pull-right">
+                    <button type="submit" class="btn btn-xs btn-default">Edit</button>
+                    <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-xs btn-success">Subscribe</button>
+                </span>>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li>Topic name:{{ topic.title }}, Topic ID:{{ topic.key.id() }}, Content: {{ topic.content}}, Author email:{{ topic.author_email }}, Topic created: {{ topic.created }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% for comment in Comment %}
+        <p>{{ comment.content }}, {{ comment.created}}</p>
+    {% endfor %}
+
+    <form method="post" action="/topic_details">
+        <div class="row">
+            <div class="pull-right">
+                <div class="col-xs-12 col-md-10">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">Add new comment</div>
+                        <div class="panel-body">
+                            <textarea rows="4" cols="60" name="comment-text"></textarea>
+                            <button type="submit" class="btn btn-md btn-success"> <a href="/topic_details"> Submit comment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+</div>
+{% endblock content %}
